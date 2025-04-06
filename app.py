@@ -5,7 +5,7 @@
 
 import telebot
 from config import keys, TOKEN
-from utils import ConvertionException, CryptoConverter
+from extensions import ConvertionException, CryptoConverter
 
 bot = telebot.TeleBot(TOKEN)
 
@@ -38,7 +38,9 @@ def convert(message: telebot.types.Message):
     except Exception as e:
         bot.reply_to(message, f'Не удалось обработать команду.\n {e}')
     else:
-        text = f"Цена {amount} {quote} в {base} составляет {total_base}"
+        total_base = float(total_base)
+        amount = float(amount)
+        text = f"Цена {amount} {quote} в {base} составляет {amount*total_base}"
         bot.send_message(message.chat.id, text)
 
 bot.polling(non_stop=True)
