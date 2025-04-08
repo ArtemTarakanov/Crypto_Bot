@@ -42,5 +42,6 @@ def convert(message: telebot.types.Message):
         amount = float(amount)
         text = f"Цена {amount} {quote} в {base} составляет {amount*total_base}"
         bot.send_message(message.chat.id, text)
-
-bot.polling(non_stop=True)
+        
+bot.remove_webhook()
+bot.polling(none_stop=True)
